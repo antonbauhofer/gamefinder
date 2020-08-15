@@ -72,12 +72,13 @@ def main():
             plot_bgcolor='white',
             margin=dict(l=0, r=0, t=0, b=0),
             showlegend=False,
+            height=80,
         )
 
         bar_fig.update_xaxes(range=[0, 10])
 
         #        st.plotly_chart(bar_fig, height=80, width=300, config=dict(displayModeBar=False, staticPlot=True))
-        st.plotly_chart(bar_fig, height=80, config=dict(displayModeBar=False,
+        st.plotly_chart(bar_fig, config=dict(displayModeBar=False,
                                                         staticPlot=True,
                                                         scrollZoom=False,
                                                         editable=False))
