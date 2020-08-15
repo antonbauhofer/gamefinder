@@ -72,6 +72,7 @@ def main():
             margin=dict(l=0, r=0, t=0, b=0),
             showlegend=False,
             height=80,
+            width=400,
         )
 
         bar_fig.update_xaxes(range=[0, 10])
