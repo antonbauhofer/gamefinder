@@ -16,7 +16,7 @@ def main():
     """
     st.markdown(hide_menu_style, unsafe_allow_html=True)
 
-    # ----- FUNCTIONS
+    # ----- METHODS
 
     # Import data
     @st.cache
@@ -31,8 +31,7 @@ def main():
                                     (games['Namen'] - nam_d) ** 2).sort_values('g').drop('g', axis=1)
         return games_sort.index
 
-        # Create polar plot
-
+    # Create polar plot
     def polar(entry_id):
         polar_fig = go.Figure(
             data=[dict(type='scatterpolar',
@@ -77,7 +76,6 @@ def main():
 
         bar_fig.update_xaxes(range=[0, 10])
 
-        #        st.plotly_chart(bar_fig, height=80, width=300, config=dict(displayModeBar=False, staticPlot=True))
         st.plotly_chart(bar_fig, config=dict(displayModeBar=False,
                                                         staticPlot=True,
                                                         scrollZoom=False,
@@ -89,7 +87,7 @@ def main():
 
     # ----- INTRO
 
-    st.title("Der interaktive Spielegenerator")
+    st.title("Der interaktive Spielefinder")
 
     st.markdown(
         """<div style="color:grey;">Bewege die Slider im Seitenmenü links und entdecke neue Aufwärmspiele.</div>""",
@@ -110,7 +108,7 @@ def main():
     else:
         random_var = False
 
-        # Attribut Auswahl
+    # Attribut Auswahl
     if random_var:
         bew_sl = st.sidebar.slider('Bewegung', 0, 10, random.randrange(0, 11, 1), 1)
         koo_sl = st.sidebar.slider('Koordination', 0, 10, random.randrange(0, 11, 1), 1)
@@ -124,19 +122,6 @@ def main():
         bue_sl = st.sidebar.slider('Bühnenpräsenz', 0, 10, slider_default, 1)
         nam_sl = st.sidebar.slider('Namen Lernen', 0, 10, slider_default, 1)
 
-    # OPTION: Drop-down Menü für Anzahl der angezeigten Ergebnisse
-    #    game_num_sl = st.sidebar.selectbox("Anzahl der dargestellten Ergebnisse", ("1", "2", "3", "4", "5"), 2)
-    #    if game_num_sl == '1':
-    #        game_num =1
-    #    if game_num_sl == '2':
-    #        game_num =2
-    #    if game_num_sl == '3':
-    #        game_num =3
-    #    if game_num_sl == '4':
-    #        game_num =4
-    #    if game_num_sl == '5':
-    #        game_num =5
-
     game_num_in = st.sidebar.number_input('Anzahl der angezeigten Spiele:',
                                           min_value=0, max_value=games.shape[0], value=3)
     game_num = game_num_in
@@ -145,12 +130,6 @@ def main():
     impressum = False
     if st.sidebar.checkbox("Impressum anzeigen", False):
         impressum = True
-
-    #    # OPTION: Spielerklärungen verstecken
-    #    if st.sidebar.checkbox("Spielerklärungen verstecken", False):
-    #        descriptions = False
-    #    else:
-    #        descriptions = True
 
     # ----- OUTPUTS
 
@@ -162,7 +141,6 @@ def main():
         st.subheader(games.iloc[order[i], 0])
         bar(order[i])
         st.markdown('Kategorie: ' + games.iloc[order[i], 2] + ', Hilfsmittel: ' + games.iloc[order[i], 3])
-        #        st.markdown('<div style="font-weight:450; font-size:small">Kategorie: </div>' + '<div style="font-size:small">' + str(games.iloc[order[i], 2]) + '</div>' + 'Test', True)
         st.markdown(games.iloc[order[i], 1])
         if not games.isna().iloc[order[i], 9]:
             if st.checkbox("Varianten anzeigen", False, key=i):
@@ -171,8 +149,6 @@ def main():
                     st.markdown('Variante 2: ' + games.iloc[order[i], 10])
                 if not games.isna().iloc[order[i], 11]:
                     st.markdown('Variante 3: ' + games.iloc[order[i], 11])
-        #                if not games.isna().iloc[order[i], 12]:
-        #                    st.markdown('Variante 4: ' + games.iloc[order[i], 12])
 
         st.markdown(" ----- ")
     if bew_sl == slider_default and koo_sl == slider_default and gru_sl == slider_default and bue_sl == slider_default and nam_sl == slider_default:
@@ -180,16 +156,11 @@ def main():
             """<div style="color:grey;">Bewege die Slider im Seitenmenü links und entdecke neue Aufwärmspiele.</div>""",
             True)
 
-    #        # OPTION: Checkbox for Radar Plot
-    #        if st.checkbox("Attribute anzeigen", False, i):
-    #            polar(order[i])
-
     # ----- FOOTER
 
     if impressum:
         st.markdown(" ----- ")
         st.markdown("""<div style="color:grey;">Impressum.</div>""", True)
-        #        st.markdown("""<div style="color:grey;">Der Author der Seite übernimmt keine Haftung für die gezeigten Inhalte.</div>""", True)
         st.markdown(
             """<div style="color:grey;">Verantwortlicher: Anton Bauhofer, Trakehner Platz 2, 81929 München, Germany. T: +49 (0) 178 1033054. E: antonbauhofer@gmail.com</div>""",
             True)
