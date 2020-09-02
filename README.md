@@ -1,6 +1,6 @@
 # gamefinder
 For interactive demonstration visit
-https://gamefinder.tonibauhofer.de/
+http://spielefinder.tonibauhofer.de
 
 Web app that interactively shows warm-up games with different attributes.
 Code outline:
